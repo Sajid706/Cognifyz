@@ -1,0 +1,21 @@
+//Take a new file and create a class and write the following code:
+package check;
+import java.util.*;
+public class Palindrome {
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the word or phrase or sentence:");
+		String s=sc.nextLine();
+		String ss=s.toLowerCase();
+		StringBuffer sb=new StringBuffer(ss);
+		sb.reverse();
+		if(sb.toString().equals(ss)) {
+			System.out.println("It's a palindrome......");
+		}
+		else {
+			System.out.println("It's not a palindrome......");
+		}
+
+	}
+
+}
