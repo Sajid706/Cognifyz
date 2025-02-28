@@ -1,0 +1,78 @@
+//Take a new file and create a class and write the following code:
+package grade;
+
+public class Student {
+    protected String sub;
+    protected  int tel,hin,eng,maths,sci,soc,sum=0;
+    final int co=6;
+	public Student(String sub,int tel, int hin, int eng, int maths, int sci, int soc){
+		this.sub=sub;
+		this.tel=tel;
+		this.hin=hin;
+		this.eng=eng;
+		this.maths=maths;
+		this.sci=sci;
+		this.soc=soc;
+		sum=sum+tel+hin+eng+maths+sci+soc;
+		
+	}
+	public void sum() {
+		System.out.println("The Total marks are:"+sum+"/"+"600");
+	}
+	
+	public float avg() {
+		return (float)sum/co;
+}
+
+}
+//Now create another class and write the following code:
+package grade;
+import java.util.*;
+public class GradeCalculator {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter Student name :");
+		String name=sc.nextLine();
+		System.out.print("Telugu:");
+		int tel=sc.nextInt();
+		System.out.print("Hindi:");
+		int hin=sc.nextInt();
+		System.out.print("English:");
+		int eng=sc.nextInt();
+		System.out.print("Maths:");
+		int maths=sc.nextInt();
+		System.out.print("Science:");
+		int sci=sc.nextInt();
+		System.out.print("Social:");
+		int soc=sc.nextInt();
+        Student s=new Student(name,tel,hin,eng,maths,sci,soc);
+        System.out.println("\n");
+        System.out.println("Result.............");
+        s.sum();
+        System.out.println("The Average is:"+s.avg()+"%");
+        if(tel<35||hin<35||eng<35||maths<35||sci<35||soc<35){
+        	System.out.println("fail");
+        }
+        else if(s.avg()>=90&&s.avg()<=100) {
+        	System.out.println("passed with A grade");
+        }
+        else if(s.avg()>=80&&s.avg()<90) {
+        	System.out.println("passed with B grade");
+        }
+        else if(s.avg()>=70&&s.avg()<80) {
+        	System.out.println("passed with C grade");
+        }
+        else if(s.avg()>=50&&s.avg()<70) {
+        	System.out.println("passed with D grade");
+        }
+        else if(s.avg()>=35&&s.avg()<50) {
+        	System.out.println("passed at E grade");
+        }
+        else {
+        	System.out.println("fail");
+        }
+        
+		}
+
+}
