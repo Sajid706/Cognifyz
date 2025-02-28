@@ -1,0 +1,34 @@
+//Take a new file and create a class and write the following code:
+package conveerter;
+import java.util.*;
+public class Temperature {
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("1.Celsius to Fahrenheit\n2.Fahrenheit to Celsius ");
+		System.out.println("Enter your choice(1/2):");
+		int ch=sc.nextInt();
+		if(ch!=1 && ch!=2) {
+			System.out.println("Invalid....Plaese choose proper option in the given options");
+		}
+		else {
+		System.out.println("Enter the temperature :");
+		float s=sc.nextFloat();
+		switch(ch){
+		case 1:
+			float f=(s*(9/5.0f))+32;
+			System.out.println("\nThe Result");
+			System.out.println("*".repeat(20));
+			System.out.println(s+"°C"+" = "+f+"°F");
+			break;
+		case 2:
+			float c=(s-32)*(5/9.0f);
+			System.out.println("\nThe Result.........");
+			System.out.println("*".repeat(20));
+			System.out.println(s+"°F"+" = "+c+"°C");
+			break;
+			
+		}
+		}
+	}
+	
+}
