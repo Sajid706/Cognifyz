@@ -1,0 +1,80 @@
+package tictoctoe;
+import java.io.*;
+import java.util.Scanner;
+public class Sample {
+    public static String caesarCipher(String text, int shift, boolean encrypt) {
+        StringBuilder result = new StringBuilder();
+
+        for (char character : text.toCharArray()) {
+            if (Character.isLetter(character)) {
+                char base = Character.isLowerCase(character) ? 'a' : 'A';
+                int shiftedChar = (encrypt ? character - base + shift : character - base - shift + 26) % 26 + base;
+                result.append((char) shiftedChar);
+            } else {
+                result.append(character); 
+            }
+        }
+        return result.toString();
+    }
+
+    public static String readFile(String filePath) {
+        StringBuilder content = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                content.append(line).append("\n");
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading the file: " + e.getMessage());
+        }
+        return content.toString();
+    }
+
+    // Method to write content to a file
+    public static void writeFile(String filePath, String content) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+            bw.write(content);
+        } catch (IOException e) {
+            System.out.println("Error writing to the file: " + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Ask the user for the action: encryption or decryption
+        System.out.print("Do you want to encrypt or decrypt? (e/d): ");
+        String action = scanner.nextLine().toLowerCase();
+
+        // Validate action input
+        if (!action.equals("e") && !action.equals("d")) {
+            System.out.println("Invalid input. Please enter 'e' for encryption or 'd' for decryption.");
+            return;
+        }
+
+        // Ask for the file path
+        System.out.print("Enter the file path: ");
+        String filePath = scanner.nextLine();
+
+        // Read the content from the file
+        String content = readFile(filePath);
+
+        if (content.isEmpty()) {
+            System.out.println("The file is empty or could not be read.");
+            return;
+        }
+        System.out.print("Enter the shift value (1-25): ");
+        int shift = scanner.nextInt();
+        if (shift < 1 || shift > 25) {
+            System.out.println("Invalid shift value. Please enter a number between 1 and 25.");
+            return;
+        }
+        boolean encrypt = action.equals("e");
+        String result = caesarCipher(content, shift, encrypt);
+        System.out.print("Enter the output file path: ");
+        scanner.nextLine(); // Consume the newline character
+        String outputFilePath = scanner.nextLine();
+        writeFile(outputFilePath, result);
+        System.out.println("The file has been " + (encrypt ? "encrypted" : "decrypted") + " and saved to " + outputFilePath);
+    }
+}
